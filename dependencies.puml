@@ -1,0 +1,4 @@
+@startuml
+[lib/a.dart] --> [lib/b.dart]
+[lib/b.dart] --> [lib/c.dart]
+@enduml
