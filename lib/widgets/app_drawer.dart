@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import '../screens/dashboard_screen.dart';
-import '../screens/instrument_list_screen.dart';
-import '../screens/user_list_screen.dart';
-import '../main.dart'; // グローバルな mockUsers, mockInstruments を利用するため
 
 class AppDrawer extends StatelessWidget {
+  const AppDrawer({Key? key}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         children: <Widget>[
-          DrawerHeader(
+          const DrawerHeader(
             child: Text(
               'メニュー',
               style: TextStyle(fontSize: 24, color: Colors.white),
@@ -18,44 +16,33 @@ class AppDrawer extends StatelessWidget {
             decoration: BoxDecoration(color: Colors.blue),
           ),
           ListTile(
-            title: Text('ホーム'),
+            title: const Text('ホーム'),
             onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DashboardScreen(
-                    mockUsers: mockUsers,
-                    mockInstruments: mockInstruments,
-                  ),
-                ),
-              );
+              Navigator.pushReplacementNamed(context, '/home');
             },
           ),
           ListTile(
-            title: Text('楽器一覧'),
+            title: const Text('資産管理'),
             onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => InstrumentListScreen(
-                    mockInstruments: mockInstruments,
-                    mockUsers: mockUsers,
-                  ),
-                ),
-              );
+              Navigator.pushReplacementNamed(context, '/asset/list');
             },
           ),
           ListTile(
-            title: Text('ユーザー一覧'),
+            title: const Text('購入検討資産管理'),
             onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => UserListScreen(
-                    mockUsers: mockUsers,
-                  ),
-                ),
-              );
+              Navigator.pushReplacementNamed(context, '/acquisition');
+            },
+          ),
+          ListTile(
+            title: const Text('予算管理'),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/budget');
+            },
+          ),
+          ListTile(
+            title: const Text('ナレッジ管理'),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/knowledge');
             },
           ),
         ],
