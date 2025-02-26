@@ -1,5 +1,5 @@
 name: myapp
-description: A new Flutter project.
+description: 打楽器管理システム
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -18,24 +18,31 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.14.0 <3.0.0"
+  sdk: ">=2.16.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
-    
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.5
+  cupertino_icons: ^1.0.2
+  provider: ^6.0.0          # 状態管理（MVVM実装）
+  http: ^0.13.5             # APIリクエスト
+  json_annotation: ^4.7.0   # JSONシリアライズ
+  shared_preferences: ^2.1.0 # ローカルストレージ
+  intl: ^0.17.0             # 日付フォーマット
+  flutter_markdown: ^0.6.13 # ナレッジ表示用
+  fl_chart: ^0.70.1         # ダッシュボードグラフ用
+  image_picker: ^0.8.6      # 画像選択
+  file_picker: ^9.0.1       # ファイル選択
+  path_provider: ^2.0.11    # ファイルパス操作
+  sqflite: ^2.2.8
+  crypto: ^3.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  provider: ^6.0.0
-  dart_code_metrics: ^5.0.0 
+  flutter_lints: ^1.0.0
+  build_runner: ^2.3.0      # コード生成
+  json_serializable: ^6.5.0 # JSONシリアライズ生成
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -50,8 +57,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  #   - images/logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

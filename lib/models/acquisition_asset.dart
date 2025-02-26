@@ -1,57 +1,62 @@
-class AcquisitionAsset {
-  final int acquisitionAssetId;
-  final String assetName;
+import 'package:json_annotation/json_annotation.dart';
+import 'base_model.dart';
+import 'user.dart';
+
+part 'acquisition_asset.g.dart';
+
+@JsonSerializable()
+class AcquisitionAsset extends BaseModel {
+  final int acquisitionId;
+  final String assetCode;
+  final String category;
   final String model;
-  final String vendor;
-  final double estimatedCost;
-  final String calculationDetails;
+  final double price;
   final String currency;
-  final String purchaseReason;
+  final String? purchaseReason;
   final String status; // pending, delivering, arrived
-  final int requestedBy;
-  final DateTime requestedDate;
-
+  final int? requestedById;
+  final User? requestedBy;
+  final DateTime? requestedDate;
+  final String? description;
+  final int? fiscalYear;
+  final String? attachment;
+  
   AcquisitionAsset({
-    required this.acquisitionAssetId,
-    required this.assetName,
+    required this.acquisitionId,
+    required this.assetCode,
+    required this.category,
     required this.model,
-    required this.vendor,
-    required this.estimatedCost,
-    required this.calculationDetails,
+    required this.price,
     required this.currency,
-    required this.purchaseReason,
+    this.purchaseReason,
     required this.status,
-    required this.requestedBy,
-    required this.requestedDate,
-  });
-
-  factory AcquisitionAsset.fromJson(Map<String, dynamic> json) {
-    return AcquisitionAsset(
-      acquisitionAssetId: json['acquisition_asset_id'],
-      assetName: json['asset_name'],
-      model: json['model'],
-      vendor: json['vendor'],
-      estimatedCost: (json['estimated_cost'] as num).toDouble(),
-      calculationDetails: json['calculation_details'],
-      currency: json['currency'],
-      purchaseReason: json['purchase_reason'],
-      status: json['status'],
-      requestedBy: json['requested_by'],
-      requestedDate: DateTime.parse(json['requested_date']),
-    );
+    this.requestedById,
+    this.requestedBy,
+    this.requestedDate,
+    this.description,
+    this.fiscalYear,
+    this.attachment,
+    int? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) : super(id: id, createdAt: createdAt, updatedAt: updatedAt);
+  
+  factory AcquisitionAsset.fromJson(Map<String, dynamic> json) => 
+      _$AcquisitionAssetFromJson(json);
+  
+  @override
+  Map<String, dynamic> toJson() => _$AcquisitionAssetToJson(this);
+  
+  @override
+  String getDisplayValue() => '$assetCode - $model';
+  
+  // ステータスの表示用テキスト
+  String get statusText {
+    switch (status) {
+      case 'pending': return '申請中';
+      case 'delivering': return '配送中';
+      case 'arrived': return '到着済';
+      default: return status;
+    }
   }
-
-  Map<String, dynamic> toJson() => {
-        'acquisition_asset_id': acquisitionAssetId,
-        'asset_name': assetName,
-        'model': model,
-        'vendor': vendor,
-        'estimated_cost': estimatedCost,
-        'calculation_details': calculationDetails,
-        'currency': currency,
-        'purchase_reason': purchaseReason,
-        'status': status,
-        'requested_by': requestedBy,
-        'requested_date': requestedDate.toIso8601String(),
-      };
 } 
